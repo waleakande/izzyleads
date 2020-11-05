@@ -1,0 +1,13 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    branches:
+      only:
+        - master
+    steps:
+      - run:
+          name: Deploy API Swagger Docs
+          command: ssh -o "StrictHostKeyChecking no" docs@docs.izzyleads.com "cd ~/app; git pull"

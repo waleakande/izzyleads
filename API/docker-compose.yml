@@ -1,0 +1,49 @@
+version: "2"
+services:
+  node:
+    env_file: .env
+    # server_name: node
+    build:
+      context: .
+      # You can rename the file to make it tell what it does.
+      # since we are composing different images and not just a sigle image
+      dockerfile: node.Dockerfile
+    volumes:
+      - ./:/home/node/app
+    command: "npm run start"
+    ports:
+      - 5000:5000
+    depends_on:
+      # We now depends on node and mongodb server
+      - redis-server
+      - mongodb-server
+    networks:
+      - nginx-proxy
+      - default
+  nginx:
+    # service_name: nginx
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    volumes:
+      - ./:/home/node/app
+    restart: always
+    ports:
+      - 3000:80
+    depends_on:
+      - node
+    networks:
+      - nginx-proxy
+      - default
+  redis-server:
+    # service_name: redis
+    image: "redis:5.0.8-alpine"
+    ports:
+      - "6379:6379"
+  mongodb-server:
+    # service_name: mongodb
+    image: "mongo:4.2.3-bionic"
+    ports:
+      - "27017:27017"
+networks:
+  nginx-proxy:

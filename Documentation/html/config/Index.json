@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IZZY LEADS API",
+    "description": "Public",
+    "version": "0.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://izzyleads-api.herokuapp.com/{basePath}/{version}",
+      "description": "Staging",
+      "variables": {
+        "basePath": {
+          "enum": [
+            "api"
+          ],
+          "default": "api"
+        },
+        "version": {
+          "enum": [
+            "v1"
+          ]
+        }
+      }
+    },
+    {
+      "url": "https://localhost:3000/{basePath}/{version}",
+      "description": "The developnent API server",
+      "variables": {
+        "basePath": {
+          "enum": [
+            "api"
+          ],
+          "default": "api"
+        },
+        "version": {
+          "enum": [
+            "v1"
+          ],
+          "default": "v1"
+        }
+      }
+    },
+    {
+      "url": "https://api.izzyleads.com/{basePath}/{version}",
+      "description": "Live",
+      "variables": {
+        "basePath": {
+          "enum": [
+            "api"
+          ],
+          "default": "api"
+        },
+        "version": {
+          "enum": [
+            "v1"
+          ],
+          "default": "v1"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Status Checking.",
+        "responses": {
+          "200": {
+            "description": "Successful Operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

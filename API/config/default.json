@@ -1,0 +1,22 @@
+{
+  "port": 5000,
+  "logs": {
+    "level": "silly"
+  },
+  "jwtSecret": "adfasdfasdfasdfasdfas",
+  "databaseURL": "mongodb://localhost:27017/bulletproof-nodejs",
+
+  "apiPrefix": "/api/v1/",
+  "listenersConcurrency": 5,
+  "redisURL": "redis://localhost:6379",
+  "supportedRoles": ["user", "contractor", "admin", "super admin"],
+  "superAdmin": {
+    "name": "Super Admin",
+    "email": "izzyleads@superadmin.com",
+    "password": "TEST"
+  },
+  "paginateConfig": {
+    "limit": 20,
+    "skip": 100
+  }
+}
